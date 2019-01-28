@@ -1,0 +1,15 @@
+version: '3'
+services:
+    flaskapp:
+        build: ./rest_server
+        ports: 
+            - 5001:5001
+        restart: always 
+
+    web:
+        build: ./web
+        restart: always
+        ports: 
+            - 3002:3000
+        depends_on: 
+            - flaskapp

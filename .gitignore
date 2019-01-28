@@ -1,0 +1,8 @@
+.venv/*
+**/.idea
+**/__pycache__
+**/.docker*
+**/node_modules
+**/build
+
+
