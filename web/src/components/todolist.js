@@ -4,8 +4,6 @@ import { Button} from 'reactstrap';
 
 class TodoList extends Component{
   render(){
-    console.log(this.props);
-
       if (this.props.list){
           let todos = this.props.list;
           return  (Object.keys(todos).map((key, value) => (
@@ -22,25 +20,6 @@ class TodoList extends Component{
         }else{
           return(<p>loading</p>)
         }
-      // return(
-      // if (this.props.list){
-      //   let todos = this.props.list;
-      //   return  (Object.keys(todos).map((key, value) => (
-      //     <tr key={key}>
-      //     <td>{key}</td>
-      //     <td>{todos[key]}</td>
-      //     <td>
-      //       <Button color="success" className="mr-2" onClick={this.editTodo.bind(this,todos[key])}>Edit</Button>
-      //       <Button color="danger" onClick={this.deleteTodo.bind(this, key)}>Delete</Button>
-      //     </td>
-      //     </tr>
-      //   )));
-      //
-      // }else{
-      //   return(<p>loading</p>)
-      // }
-
-    // );
   }
 }
 
