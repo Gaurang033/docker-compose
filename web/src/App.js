@@ -1,6 +1,8 @@
-import { Button, Table, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label, FormGroup} from 'reactstrap';
+import {Table} from 'reactstrap';
 import axios from 'axios'
 import React, { Component } from 'react';
+import TodoList from './components/todolist'
+import AddTodo from './components/addtodo'
 class App extends Component {
   state = {
     TodoList: {},
@@ -9,6 +11,7 @@ class App extends Component {
     },
     newTodoModal: false
   }
+
   constructor() {
     super();
     this.rest_server="http://localhost:5001";
@@ -30,27 +33,6 @@ class App extends Component {
       }
     });
   }
-
-  todoList() {
-
-    if (this.state.TodoList){
-      let todos = this.state.TodoList;
-      return  (Object.keys(todos).map((key, value) => (
-        <tr key={key}>
-        <td>{key}</td>
-        <td>{todos[key]}</td>
-        <td>
-          <Button color="success" className="mr-2" onClick={this.editTodo.bind(this,todos[key])}>Edit</Button>
-          <Button color="danger" onClick={this.deleteTodo.bind(this, key)}>Delete</Button>
-        </td>
-        </tr>
-      )));
-
-    }else{
-      return(<p>loading</p>)
-    }
-  }
-
 
   handleChange = (event) => {
     // get name and value properties from event target
@@ -84,9 +66,6 @@ class App extends Component {
   }
 
   deleteTodo = (id, event) => {
-    console.log(id);
-    console.log(event);
-    console.log(event.target);
     axios
     .delete(this.rest_server+'/todos/'+id)
     .then(response=>{
@@ -103,34 +82,18 @@ class App extends Component {
   }
 
 
-  modal = () => {
-    return(<div>
-      <Button color="primary" onClick={this.toggleNewTodoModal}>Add new Todo</Button>
-      <Modal isOpen={this.state.newTodoModal} >
-      <ModalHeader toggle={this.toggleNewTodoModal}>Modal title</ModalHeader>
-      <ModalBody>
-        <FormGroup >
-          <Label for="Title">Task </Label>
-          <Input name="task"
-                 value= {this.state.newTodoList.task}
-                 onChange={this.handleChange}/>
-        </FormGroup>
-      </ModalBody>
-      <ModalFooter>
-        <Button color="primary" onClick={this.addNewTodo}>OK</Button>{' '}
-        <Button color="secondary" onClick={this.toggleNewTodoModal}>Cancel</Button>
-      </ModalFooter>
-      </Modal>
-
-    </div>
-    );
-  }
-
   render() {
     return(
+
       <div className="App container">
-      { this.modal() }
       <h1>TODO List</h1>
+
+      <AddTodo newTodoModal={this.state.newTodoModal}
+              newTodoList = {this.state.newTodoList}
+              toggleNewTodoModal={this.toggleNewTodoModal}
+              addNewTodo = {this.addNewTodo}
+              handleChange = {this.handleChange}/> {' '}
+
       <Table>
         <thead>
           <tr>
@@ -140,7 +103,7 @@ class App extends Component {
           </tr>
         </thead>
         <tbody>
-          { this.todoList() }
+          <TodoList list={this.state.TodoList} editTodo={this.editTodo} deleteTodo={this.deleteTodo}/>
         </tbody>
       </Table>
       </div>
