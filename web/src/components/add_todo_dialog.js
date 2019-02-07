@@ -21,7 +21,7 @@ export default class AddTodoDialog extends Component {
             <div>
                 <Button color="primary" onClick={this.toggleAddTodoDialog}>Add new Todo</Button>
                 <Modal isOpen={this.props.is_add_todo_dialog_opened} >
-                    <ModalHeader toggle={this.toggleAddTodoDialog}>Modal title</ModalHeader>
+                    <ModalHeader toggle={this.toggleAddTodoDialog}>Add New TODO</ModalHeader>
                     <ModalBody>
                         <FormGroup >
                             <Label for="Title">Task </Label>

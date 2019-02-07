@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import * as actionCreator from '../actions'
+import {listTodos}  from '../actions/list_todo_actions'
+import {deleteTodo}  from '../actions/delete_todo_actions'
+
 import TodoList from '../components/todo_list'
 class TodoListContainer extends Component {
     render() {
@@ -17,4 +19,11 @@ const mapStateToProps = (state) => {
     return state
 }
 
-export default connect(mapStateToProps, actionCreator)(TodoListContainer)
+const mapDispatchToProps = (dispatch) => {
+    return{
+        listTodos: () => dispatch(listTodos()),
+        deleteTodo: (id) => dispatch(deleteTodo(id))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoListContainer)

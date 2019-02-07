@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-// import AddTodo from '../components/add_todo';
 import { connect } from 'react-redux'
-import {toggleAddTodoDialog, addNewTodo, handleChange} from '../actions'
+import {toggleAddTodoDialog, handleChange} from '../actions/dialog_actions'
+import {addNewTodo} from '../actions/add_todo_actions'
 import AddTodoDialog from '../components/add_todo_dialog';
+
 class AddTodoContainer extends Component {
     render() {
         return (
